@@ -15,7 +15,7 @@ The easy way to add your [Bloglovin' Button](http://www.bloglovin.com/widgets).
 
 This widget will display any of the official Bloglovin' Buttons. You don't need to copy and paste any code, just select the button you'd like and you're good to go :)
 
-This is a free pugin developed by [www.pipdig.co](http://www.pipdig.co?utm_source=wordpress&utm_medium=wprepo&utm_campaign=bloglovin2). If you like it, please leave a rating :)
+This plugin was developed by [pipdig](http://www.pipdig.co?utm_source=wordpress&utm_medium=wprepo&utm_campaign=bloglovin2).
 
 == Installation ==
 
