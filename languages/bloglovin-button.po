@@ -1,0 +1,49 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Bloglovin Button\n"
+"POT-Creation-Date: 2015-06-05 12:45-0000\n"
+"PO-Revision-Date: 2015-06-05 12:45-0000\n"
+"Last-Translator: \n"
+"Language-Team: pipdig <hello@pipdig.co>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.6\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: ..\n"
+"X-Poedit-SearchPathExcluded-0: ../.git\n"
+"X-Poedit-SearchPathExcluded-1: ../img\n"
+
+#: ../bloglovin-button.php:59
+msgid "Display the official Bloglovin' button."
+msgstr ""
+
+#: ../bloglovin-button.php:60
+msgid "Bloglovin' Button"
+msgstr ""
+
+#: ../bloglovin-button.php:90
+msgid ""
+"Setup not complete. Please add your  Bloglovin' URL to the Bloglovin' Button "
+"in the dashboard."
+msgstr ""
+
+#: ../bloglovin-button.php:113
+msgid "Widget Title:"
+msgstr ""
+
+#: ../bloglovin-button.php:120
+msgid "Bloglovin' Profile URL:"
+msgstr ""
+
+#: ../bloglovin-button.php:126
+msgid "You should enter your full Bloglovin' URL. For example:"
+msgstr ""
+
+#: ../bloglovin-button.php:129
+msgid "Button style:"
+msgstr ""
