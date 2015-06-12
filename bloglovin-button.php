@@ -75,17 +75,23 @@ class bloglovin_button_widget extends WP_Widget {
 		echo $before_title . $title . $after_title;
 	}
 	
-    switch ( $style_select ) {
+	switch ($style_select) {
 		case '1':
-			$hide_counter_marker = '';
-			break;
+			$counter = 'true';
+			$button = 'button';
+		break;
 		case '2':
-			$hide_counter_marker = 'data-blsdk-counter="false"';
-			break;
+			$counter = 'false';
+			$button = 'button';
+		break;
+		case '3':
+			$counter = 'false';
+			$button = '';
+		break;
 	}
 
     if (!empty($bloglovin_url)) {
-		echo '<a data-blsdk-type="button" '.$hide_counter_marker.' target="_blank" href="'.$bloglovin_url.'" class="blsdk-follow">Follow</a><script>(function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) return;js = d.createElement(s);js.id = id;js.src = "https://widget.bloglovin.com/assets/widget/loader.js";fjs.parentNode.insertBefore(js, fjs);}(document, "script", "bloglovin-sdk"))</script>';
+		echo '<div style="text-align:center;width:98%;margin:0 auto"><a class="blsdk-follow" href="'.$bloglovin_url.'" target="_blank" rel="nofollow" data-blsdk-type="'.$button.'" data-blsdk-counter="'.$counter.'">Follow on Bloglovin</a><script>(function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) return;js = d.createElement(s);js.id = id;js.src = "https://widget.bloglovin.com/assets/widget/loader.js";fjs.parentNode.insertBefore(js, fjs);}(document, "script", "bloglovin-sdk"))</script></div>';
 	} else {
 		_e("Setup not complete. Please add your  Bloglovin' URL to the Bloglovin' Button in the dashboard.", 'bloglovin-button');
 	}
@@ -135,7 +141,9 @@ class bloglovin_button_widget extends WP_Widget {
 <br /><br />
 		<input type="radio" id="<?php echo ($this->get_field_id( 'style_select' ) . '-2') ?>" name="<?php echo ($this->get_field_name( 'style_select' )) ?>" value="2" <?php checked( $style_select == 2, true) ?>>
 		<label for="<?php echo ($this->get_field_id( 'style_select' ) . '-2' ) ?>"><img src="<?php echo plugins_url( 'img/button_no_count.png', __FILE__ ) ?>" style="position:relative;top:5px;" /></label>
-
+<br /><br />
+		<input type="radio" id="<?php echo ($this->get_field_id( 'style_select' ) . '-3') ?>" name="<?php echo ($this->get_field_name( 'style_select' )) ?>" value="3" <?php checked( $style_select == 3, true) ?>>
+		<label for="<?php echo ($this->get_field_id( 'style_select' ) . '-3' ) ?>"><img src="<?php echo plugins_url( 'img/bloglovin-button-full.png', __FILE__ ) ?>" style="position:relative;top:5px;" /></label>
 	</p>
 	
      <?php
@@ -146,7 +154,7 @@ class bloglovin_button_widget extends WP_Widget {
     $instance = $old_instance;
 	$instance['title'] = strip_tags($new_instance['title']);
     $instance['bloglovin_url'] = strip_tags($new_instance['bloglovin_url']);
-	$instance['style_select'] = ( isset( $new_instance['style_select'] ) && $new_instance['style_select'] > 0 && $new_instance['style_select'] < 3 ) ? (int) $new_instance['style_select'] : 0; // 3 is number above total radio options
+	$instance['style_select'] = ( isset( $new_instance['style_select'] ) && $new_instance['style_select'] > 0 && $new_instance['style_select'] < 4 ) ? (int) $new_instance['style_select'] : 0; // 4 is total radio +1
 
     return $instance;
   }
