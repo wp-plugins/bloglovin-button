@@ -1,13 +1,13 @@
 === Bloglovin Button ===
 Contributors: pipdig
-Tags: bloglovin, bloglovin button, bloglovin widget, subscribe, widget
+Tags: bloglovin, bloglovin button, bloglovin widget, subscribe, widget, followers, social, blog, blogging
 Requires at least: 2.9
 Tested up to: 4.2.2
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Add your Bloglovin' Button to WordPress.
+Easily add the Bloglovin' Button to your WordPress blog.
 
 == Description ==
 

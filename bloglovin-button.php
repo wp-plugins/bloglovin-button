@@ -4,7 +4,7 @@ Plugin Name: Bloglovin Button
 Plugin URI: http://wordpress.org/extend/plugins/bloglovin-button/
 Version: 1.0.0
 Author: pipdig
-Description: Easily add the Bloglovin Button to your site.
+Description: Easily add the Bloglovin Button to your WordPress blog.
 Text Domain: bloglovin-button
 Author URI: http://www.pipdig.co/
 License: GPLv2 or later
@@ -155,10 +155,109 @@ class bloglovin_button_widget extends WP_Widget {
 	$instance['title'] = strip_tags($new_instance['title']);
     $instance['bloglovin_url'] = strip_tags($new_instance['bloglovin_url']);
 	$instance['style_select'] = ( isset( $new_instance['style_select'] ) && $new_instance['style_select'] > 0 && $new_instance['style_select'] < 4 ) ? (int) $new_instance['style_select'] : 0; // 4 is total radio +1
-
+	update_option('pipdig_bloglovin_btn_url', $instance['bloglovin_url']);
     return $instance;
   }
   
 }
-
 add_action( 'widgets_init', create_function('', 'return register_widget("bloglovin_button_widget");') );
+
+
+/*
+function pipdig_bloglovin_button_event_setup_schedule() {
+	if ( ! wp_next_scheduled( 'pipdig_bloglovin_button_daily_event' ) ) {
+		wp_schedule_event( time(), 'daily', 'pipdig_bloglovin_button_daily_event'); //hourly, twicedaily or daily
+	}
+}
+add_action( 'wp', 'pipdig_bloglovin_button_event_setup_schedule' );
+
+function pipdig_bloglovin_button_do_this_daily() {
+
+		$bloglovin_url = get_option('pipdig_bloglovin_btn_url');
+		if($bloglovin_url) {
+			$bloglovin = wp_remote_fopen($bloglovin_url); //get the html returned from the following url (was file_get_contents)
+			$bloglovin_doc = new DOMDocument();
+				libxml_use_internal_errors(TRUE); //disable libxml errors
+				if(!empty($bloglovin)){ //if any html is actually returned
+					$bloglovin_doc->loadHTML($bloglovin);
+					libxml_clear_errors(); //remove errors for yucky html
+					$bloglovin_xpath = new DOMXPath($bloglovin_doc);
+					$bloglovin_row = $bloglovin_xpath->query('//div[@class="num"]');
+					if($bloglovin_row->length > 0){
+					foreach($bloglovin_row as $row){
+						$followers = $row->nodeValue;
+						$followers = str_replace(' ', '', $followers);
+						$followers_int = intval( $followers );
+						$date = date('d');
+						update_option('pipdig_bloglovin_btn_count'.$date, $followers_int);
+					}
+				}
+			}
+		}
+
+}
+add_action( 'pipdig_bloglovin_button_daily_event', 'pipdig_bloglovin_button_do_this_daily' );
+
+
+
+
+
+
+function pipdig_bloglovin_button_dashboard_widgets() {
+	add_meta_box( 
+		'pipdig_bloglovin_button_dashboard_stats',
+		__("Bloglovin' Follower History", 'bloglovin-button'),
+		'pipdig_bloglovin_button_dashboard_stats_function',
+			'dashboard',
+			'side',
+			'high'
+		);
+}
+add_action( 'wp_dashboard_setup', 'pipdig_bloglovin_button_dashboard_widgets' );
+
+
+function pipdig_bloglovin_button_dashboard_stats_function() {
+
+	$bloglovin = get_option('pipdig_bloglovin_follower_count');
+	
+	?>
+	<?php if ($bloglovin) {	?>
+		<script src="https://www.google.com/jsapi"></script>
+		<script>
+			google.load('visualization', '1', {packages: ['corechart', 'line']});
+			google.setOnLoadCallback(socialMediaFollowers);
+
+			function socialMediaFollowers() {
+				var data = google.visualization.arrayToDataTable([
+				['Channel', 'Followers', { role: 'style' }],
+				<?php if ($bloglovin) { ?> ['1st', <?php echo $bloglovin; ?>, 'color: #37aeed' ], <?php } ?>
+				<?php if ($bloglovin) { ?> ['2nd', <?php echo $bloglovin; ?>, 'color: #37aeed' ], <?php } ?>
+				<?php if ($bloglovin) { ?> ['3rd', <?php echo $bloglovin; ?>, 'color: #37aeed' ], <?php } ?>
+				<?php if ($bloglovin) { ?> ['4th', <?php echo $bloglovin; ?>, 'color: #37aeed' ], <?php } ?>
+				]);
+
+				  var options = {
+					title: '',
+					chartArea: {width: '64%'},
+					hAxis: {
+					  title: '',
+					  minValue: 0,
+					},
+					vAxis: {
+					  title: '',
+					},
+					legend: 'none',
+				  };
+
+				  var chart = new google.visualization.BarChart(document.getElementById('pipdig_bloglovin_button_stats_graph'));
+				  chart.draw(data, options);
+			}
+			
+		</script>
+			<div id="pipdig_bloglovin_button_stats_graph" style="width: 400px; height: 120px;"></div>
+			<?php if ($bloglovin) { ?><p><strong>Bloglovin:</strong> <?php echo $bloglovin; ?></p><?php } ?>
+		<?php
+	} //end if ($total)
+}
+
+*/
