@@ -19,8 +19,6 @@ We'll update this widget whenever Bloglovin' releases new layouts/options for th
 
 This free plugin was developed by [pipdig](http://www.pipdig.co?utm_source=wordpress&utm_medium=wprepo&utm_campaign=bloglovin2). Feel free to tweet us [@pipdig](https://twitter.com/pipdig) if you have any quesitons, or use the [support forum](https://wordpress.org/support/plugin/bloglovin-button).
 
-Has this free plugin helped you? [Leave a rating](https://wordpress.org/support/view/plugin-reviews/bloglovin-button?rate=5#postform)! :)
-
 == Installation ==
 
 1. Upload `plugin-name.php` to the `/wp-content/plugins/` directory.
@@ -32,10 +30,6 @@ Has this free plugin helped you? [Leave a rating](https://wordpress.org/support/
 = Do I need to log in to Bloglovin' or enter my user details? =
 
 Nope! This plugin won't request any details other than a link to your blog's profile on Bloglovin'.  You do not need to log in to your account or give any private information.
-
-= I want to customize my Bloglovin' button even more! =
-
-You may be interested in our other free [Bloglovin' Widget](https://wordpress.org/plugins/bloglovin-widget/). You can also edit the colors and style of your Bloglovin' button by using any of our [WordPress themes](http://www.pipdig.co/products/premade-wordpress-themes/?utm_source=wordpress&utm_medium=wprepo&utm_campaign=bloglovin2).
 
 == Screenshots ==
 
