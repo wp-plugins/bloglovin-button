@@ -15,7 +15,11 @@ The easy way to add your **Bloglovin' Button** to your WordPress blog.
 
 This widget will display any of the official Bloglovin' Buttons. You don't need to copy and paste any code, just select the button you'd like and you're good to go.
 
-This free plugin was developed by [pipdig](http://www.pipdig.co?utm_source=wordpress&utm_medium=wprepo&utm_campaign=bloglovin2).
+We'll update this widget whenever Bloglovin' releases new layouts/options for their buttons.  So you only ever have to install this plugin once, then you'll be able to have the newest features at the click of a button.
+
+This free plugin was developed by [pipdig](http://www.pipdig.co?utm_source=wordpress&utm_medium=wprepo&utm_campaign=bloglovin2). Feel free to tweet us [@pipdig](https://twitter.com/pipdig) if you have any quesitons, or use the [support forum](https://wordpress.org/support/plugin/bloglovin-button).
+
+Has this free plugin helped you? [Leave a rating](https://wordpress.org/support/view/plugin-reviews/bloglovin-button?rate=5#postform)! :)
 
 == Installation ==
 
