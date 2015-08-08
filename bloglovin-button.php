@@ -2,7 +2,7 @@
 /*
 Plugin Name: Bloglovin Button
 Plugin URI: http://wordpress.org/extend/plugins/bloglovin-button/
-Version: 1.0.0
+Version: 1.1.0
 Author: pipdig
 Description: Easily add the Bloglovin Button to your WordPress blog.
 Text Domain: bloglovin-button
@@ -38,10 +38,7 @@ if ( ! defined ( 'ABSPATH' ) ) {
 function bloglovin_button_textdomain() {
 	$domain = 'bloglovin-button';
 	$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
-
-	// wp-content/languages/plugin-name/plugin-name-en_GB.mo
 	load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '/' . $domain . '-' . $locale . '.mo' );
-	// wp-content/plugins/plugin-name/languages/plugin-name-en_GB.mo
 	load_plugin_textdomain( $domain, FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
 }
 add_action( 'init', 'bloglovin_button_textdomain' );
@@ -57,7 +54,7 @@ class bloglovin_button_widget extends WP_Widget {
  
   public function __construct() {
       $widget_ops = array('classname' => 'bloglovin_button_widget', 'description' => __("Display the official Bloglovin' button.", 'bloglovin-button') );
-      $this->WP_Widget('bloglovin_button_widget', __("Bloglovin' Button", 'bloglovin-button'), $widget_ops);
+      parent::__construct('bloglovin_button_widget', __("Bloglovin' Button", 'bloglovin-button'), $widget_ops);
   }
   
   function widget($args, $instance) {
