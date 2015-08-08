@@ -1,9 +1,9 @@
 === Bloglovin Button ===
 Contributors: pipdig
-Tags: bloglovin, bloglovin button, bloglovin widget, subscribe, widget, followers, social, blog, blogging
-Requires at least: 2.9
-Tested up to: 4.2.2
-Stable tag: trunk
+Tags: bloglovin, bloglovin button, bloglovin widget, subscribe, widget, followers, social, blog, blogging, bloglovin follow
+Requires at least: 3.6
+Tested up to: 4.3
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -36,6 +36,9 @@ Nope! This plugin won't request any details other than a link to your blog's pro
 1. Widget options.
 
 == Changelog ==
+
+= 1.1.0 =
+* Compatability with upcoming WordPress 4.3.
 
 = 1.0.0 =
 * Initial release!
