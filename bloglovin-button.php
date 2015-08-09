@@ -2,9 +2,9 @@
 /*
 Plugin Name: Bloglovin Button
 Plugin URI: http://wordpress.org/extend/plugins/bloglovin-button/
-Version: 1.1.0
+Version: 1.2.0
 Author: pipdig
-Description: Easily add the Bloglovin Button to your WordPress blog.
+Description: Easily add the Bloglovin Button to your WordPress blog. No code, no fuss!
 Text Domain: bloglovin-button
 Author URI: http://www.pipdig.co/
 License: GPLv2 or later
@@ -36,10 +36,7 @@ if ( ! defined ( 'ABSPATH' ) ) {
  * @since 1.0.0
  */
 function bloglovin_button_textdomain() {
-	$domain = 'bloglovin-button';
-	$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
-	load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '/' . $domain . '-' . $locale . '.mo' );
-	load_plugin_textdomain( $domain, FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
+	load_plugin_textdomain( 'bloglovin-button', false, 'bloglovin-button/languages' );
 }
 add_action( 'init', 'bloglovin_button_textdomain' );
 
@@ -88,7 +85,7 @@ class bloglovin_button_widget extends WP_Widget {
 	}
 
     if (!empty($bloglovin_url)) {
-		echo '<div style="text-align:center;width:98%;margin:0 auto"><a class="blsdk-follow" href="'.$bloglovin_url.'" target="_blank" rel="nofollow" data-blsdk-type="'.$button.'" data-blsdk-counter="'.$counter.'">Follow on Bloglovin</a><script>(function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) return;js = d.createElement(s);js.id = id;js.src = "https://widget.bloglovin.com/assets/widget/loader.js";fjs.parentNode.insertBefore(js, fjs);}(document, "script", "bloglovin-sdk"))</script></div>';
+		echo '<div style="text-align:center;width:98%;margin:0 auto"><a class="blsdk-follow" href="'.$bloglovin_url.'" target="_blank" rel="nofollow" data-blsdk-type="'.$button.'" data-blsdk-counter="'.$counter.'">Follow on Bloglovin</a><script>(function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) return;js = d.createElement(s);js.id = id;js.src = "//widget.bloglovin.com/assets/widget/loader.js";fjs.parentNode.insertBefore(js, fjs);}(document, "script", "bloglovin-sdk"))</script></div>';
 	} else {
 		_e("Setup not complete. Please add your  Bloglovin' URL to the Bloglovin' Button in the dashboard.", 'bloglovin-button');
 	}
@@ -116,19 +113,15 @@ class bloglovin_button_widget extends WP_Widget {
      ?>
 	<p>
 		<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Widget Title:', 'bloglovin-button'); ?></label>
-		<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" 
-		name="<?php echo $this->get_field_name('title'); ?>" type="text" 
-		value="<?php echo esc_attr($title); ?>" />
+		<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>" />
 	</p>
 
 	<p>
-		<label for="<?php echo $this->get_field_id('bloglovin_url'); ?>"><?php _e("Bloglovin' Profile URL:", 'bloglovin-button'); ?></label>
-		<input class="widefat" id="<?php echo $this->get_field_id('bloglovin_url'); ?>" 
-		name="<?php echo $this->get_field_name('bloglovin_url'); ?>" type="text" 
-		value="<?php echo esc_attr($bloglovin_url); ?>" />
+		<label for="<?php echo $this->get_field_id('bloglovin_url'); ?>"><?php _e("Bloglovin' URL:", 'bloglovin-button'); ?></label>
+		<input class="widefat" id="<?php echo $this->get_field_id('bloglovin_url'); ?>" name="<?php echo $this->get_field_name('bloglovin_url'); ?>" type="text" value="<?php echo esc_attr($bloglovin_url); ?>" />
 	</p>
 	
-	<p><?php _e("You should enter your full Bloglovin' URL. For example:", 'bloglovin-widget'); ?><br /><em>https://www.bloglovin.com/blogs/inthefrow-4177899</em></p>
+	<p style="font-size: 90%"><?php _e("You should enter your full Bloglovin' URL. For example:", 'bloglovin-widget'); ?><br /><em>https://www.bloglovin.com/blogs/inthefrow-4177899</em></p>
 	
 	<p>
 		<legend><h4><?php _e('Button style:', 'bloglovin-widget'); ?></h4></legend>
@@ -142,6 +135,8 @@ class bloglovin_button_widget extends WP_Widget {
 		<input type="radio" id="<?php echo ($this->get_field_id( 'style_select' ) . '-3') ?>" name="<?php echo ($this->get_field_name( 'style_select' )) ?>" value="3" <?php checked( $style_select == 3, true) ?>>
 		<label for="<?php echo ($this->get_field_id( 'style_select' ) . '-3' ) ?>"><img src="<?php echo plugins_url( 'img/bloglovin-button-full.png', __FILE__ ) ?>" style="position:relative;top:5px;" /></label>
 	</p>
+	
+	<p><?php _e("You can also add your Bloglovin' button to any post/page by using the shortcode [bloglovin_button]", 'bloglovin-button'); ?></p>
 	
      <?php
    
@@ -158,6 +153,89 @@ class bloglovin_button_widget extends WP_Widget {
   
 }
 add_action( 'widgets_init', create_function('', 'return register_widget("bloglovin_button_widget");') );
+
+
+
+
+
+/**
+ * Shortcode
+ *
+ * @since 1.2.0
+ */
+function bloglovin_button_shortcode( $atts ) {
+
+	// Attributes
+	extract( shortcode_atts(
+		array(
+			//'count' => 'true',
+			'color' => '#000',
+			'email' => 'false',
+		), $atts )
+	);
+	
+	$bloglovin_url = get_option('pipdig_bloglovin_btn_url');
+	$output = '';
+	
+	if ($email == 'true') {
+		$output = '<div style="text-align:center;max-width:320px;margin:0 auto"><a title="'.__('Follow on Bloglovin', 'bloglovin-button').'" class="blsdk-follow" href="'.$bloglovin_url.'" target="_blank" rel="nofollow" data-blsdk-type="" data-blsdk-counter="false">'.__('Follow on Bloglovin', 'bloglovin-button').'</a><script>(function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) return;js = d.createElement(s);js.id = id;js.src = "//widget.bloglovin.com/assets/widget/loader.js";fjs.parentNode.insertBefore(js, fjs);}(document, "script", "bloglovin-sdk"))</script></div>';
+	} else {
+		$output = '
+		<a title="'.__('Follow on Bloglovin', 'bloglovin-button').'" target="_blank" rel="nofollow" href="'.$bloglovin_url.'" style="background: '.$color.'; border: 0; border-radius: 2px; display: block; height: 20px; overflow: hidden; padding: 0 5px; position: relative; width: 110px;"><div style="background: url(//static.blovcdn.com/assets/gfx/follow.svg) no-repeat; display: inline-block; height: 14px; left: 4px; position: absolute; top: 3px; width: 15px;"></div><div style="background: url(//static.blovcdn.com/assets/gfx/logo-2-white.svg) no-repeat; display: inline-block; height: 10px; left: 21px; position: absolute; top: 5px; width: 84px;"></div></a>
+		';
+	}
+	
+	return $output;
+}
+add_shortcode( 'bloglovin_button', 'bloglovin_button_shortcode' );
+
+
+
+/**
+ * Add shortcode to Visual Composer
+ *
+ * @since ####
+ */
+ /*
+function bloglovin_button_visual_composer() {
+   vc_map( 
+	   array(
+		  "name" => __( "Bloglovin' Button", "bloglovin-button" ),
+		  "base" => "bloglovin_button",
+		  "class" => "",
+		  "category" => "Social"
+		  "params" => array(
+			 array(
+				"type" => "textfield",
+				"holder" => "div",
+				"class" => "",
+				"heading" => __( "Widget Title:", "bloglovin-button" ),
+				"param_name" => "title"
+			),
+			 array(
+				"type" => "colorpicker",
+				"holder" => "",
+				"class" => "",
+				"heading" => __( "Button Color", "bloglovin-button" ),
+				"param_name" => "color"
+			),
+			 array(
+				"type" => "checkbox",
+				"holder" => "",
+				"class" => "",
+				"heading" => __( "Display as email signup form?", "bloglovin-button" ),
+				"param_name" => "email"
+			)
+		  )
+		)
+    );
+}
+add_action( 'vc_before_init', 'bloglovin_button_visual_composer' );
+*/
+
+
+
+
 
 
 /*
