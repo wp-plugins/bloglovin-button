@@ -7,7 +7,7 @@ Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Easily add the Bloglovin' Button to your WordPress blog. No code, no fuss.
+Easily add the Bloglovin' Button to your WordPress blog ...without having to edit any code!
 
 == Description ==
 
@@ -17,7 +17,7 @@ This widget will display any of the official Bloglovin' Buttons. You don't need 
 
 We'll update this widget whenever Bloglovin' releases new layouts/options for their buttons.  Once installed, can switch between the different button styles whenever you like.
 
-This free plugin was developed by [pipdig](http://www.pipdig.co?utm_source=wordpress&utm_medium=wprepo&utm_campaign=bloglovin2). Feel free to tweet us [@pipdig](https://twitter.com/pipdig) if you have any quesitons, or use the [support forum](https://wordpress.org/support/plugin/bloglovin-button).
+This free plugin was developed by [pipdig](http://www.pipdig.co?utm_source=wordpress&utm_medium=wprepo&utm_campaign=bloglovin2). Please tweet us [@pipdig](https://twitter.com/pipdig) if you have any quesitons, or use the [support forum](https://wordpress.org/support/plugin/bloglovin-button).
 
 == Installation ==
 
